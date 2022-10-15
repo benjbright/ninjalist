@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## NetNinja Next.js Tutorial
 
-## Getting Started
+## Notes and key learning points
 
-First, run the development server:
+### Tutorial 2 - Pages & Routes
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- folders are route paths
+- `index.js` file is the root path in that folder
+- e.g. pages/ninjas/test - this will display `test.js`
+- pages/ninjas - this will display the `pages/ninjas/index.js` file
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tutorial 4 - Linking between pages
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- The 'Link' component adds the ability to do client-side navigation in the browser
+- Different pages are loaded in via Javascript and not via new HTML requests to the server
+- Results in a much quicker website experience when navigating through pages
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+#### Code splitting
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- By default, Next automatically 'code splits' our application
+- Only the Javasscript that's needed for the current page is served from the server
+- Only when we navigate to another page will it serve the Javascript for that page
+- Can see this on the 'network' tab in the dev tools
+- Only served the Javascript code that we need for the initial request
+- Each page has it's own Javascript bundle which only gets served when we navigate to that page for the first time
+- When build Next app for production - pre-fetches code in the background that might be needed when a user clicks on a link from another page
+- Does this by looking at the `Link` components on the current page
+- Pre-fetches the code for any of the pages that the links navigate to
+- When a user clicks a link the code is ready and waiting
+- Very quick user experience
 
-## Learn More
+### Tutorial 5 - Creating a Layout component
 
-To learn more about Next.js, take a look at the following resources:
+- Can wrap the `<Component {...pageprops} />` component in `_app.js` with a Layout component
+- This component renders the pages - wrap Layout around it
+- Then get access to anything nested inside the Layout component
+- Called the 'children' of the component
+- Inside the Layout component get access to the 'children' prop - anything inside the `_app.js` Component - output the children inside the Layout component
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Tutorial 6 - Adding styles
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- In the `_app.js` file import the `globals.css` file - everything has these styles applied
+- For page specific styles can use 'css modules' - stylesheet for each page component
+- Styles only apply to that specific page component - have own scoped styles
+- E.g. `Home.module.css` imported into `pages/index.js` - styles for the home page
+- NOTE - to use css modules must use 'pure' selectors - class selectors not element selectors
