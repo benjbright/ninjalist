@@ -44,3 +44,12 @@
 - Styles only apply to that specific page component - have own scoped styles
 - E.g. `Home.module.css` imported into `pages/index.js` - styles for the home page
 - NOTE - to use css modules must use 'pure' selectors - class selectors not element selectors
+
+### Tutorial 10 - Fetching Data
+
+- In a normal React application might request API data in a hook like useEffect
+- This makes the request in the browser
+- However for Next.js apps the components are all pre-rendered before they reach the browser
+- Ideally want to fetch the data before the component is rendered so rendered components have data in the template
+- Can use a special function - `getStaticProps` - runs at build time as app is built and component is rendered
+- Fetch data inside this function and return an object with a props property
